@@ -27,7 +27,9 @@ require.config({
 });
 
 require([
-    'backbone'
-], function (Backbone) {
+    'backbone',
+    './controllers/playerController'
+], function (Backbone, PlayerController) {
+    var playerController = new PlayerController();
     Backbone.history.start();
 });
