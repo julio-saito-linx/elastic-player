@@ -19,27 +19,37 @@ define([
 
     var PlayerController = Backbone.View.extend({
         initialize: function () {
-            // get 'regions'
+            this.initializeRegions();
+            this.initializeModels();
+            this.initializeViews();
+            this.renderViews();
+            this.addViewsToDOM();
+        },
+
+        initializeRegions: function() {
             this.jBody = $('.container');
             this.jStatusRegion = this.jBody.find('#status');
-
-            // initialize models
+        },
+        
+        initializeModels: function() {
             this.audio = new Audio();
             this.playlist = new Playlist();
-
-            // initialize views
-            var statusView = new StatusView({
+        },
+        
+        initializeViews: function() {
+            this.statusView = new StatusView({
                 model: this.audio
             });
+        },
+        
+        renderViews: function() {
+            this.statusView.render();
+        },
+        
+        addViewsToDOM: function() {
+            this.jStatusRegion.html(this.statusView.el);
+        },
 
-            // render views
-            statusView.render();
-
-            //add view to DOM
-            this.jStatusRegion.html(statusView.el);
-
-            //this.listenTo(this.model, 'change', this.render);
-        }
     });
 
     return PlayerController;
