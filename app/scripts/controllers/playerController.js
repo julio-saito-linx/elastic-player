@@ -31,10 +31,10 @@ define([
         },
 
         initializeRegions: function() {
-            this.jBody = $('.container');
-            this.jStatusRegion = this.jBody.find('#status');
-            this.jControlsRegion = this.jBody.find('#controls');
-            this.jPlaylistRegion = this.jBody.find('#playlist');
+            this.jMain = $('#mainContainer');
+            this.jStatusRegion = this.jMain.find('#status');
+            this.jControlsRegion = this.jMain.find('#controls');
+            this.jPlaylistRegion = this.jMain.find('#playlist');
         },
         
         initializeModels: function() {
