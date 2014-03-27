@@ -30,6 +30,6 @@ require([
     'backbone',
     './controllers/playerController'
 ], function (Backbone, PlayerController) {
-    var playerController = new PlayerController();
+    new PlayerController();
     Backbone.history.start();
 });
