@@ -28,8 +28,15 @@ require.config({
 
 require([
     'backbone',
-    './controllers/playerController'
-], function (Backbone, PlayerController) {
+    './controllers/playerController',
+    './playerCommunicator'
+], function (Backbone, PlayerController, playerCommunicator) {
+    //global event system
+    playerCommunicator.on('showMessage', function(message) {
+        console.log('showMessage:', message);
+    })
+
     new PlayerController();
+
     Backbone.history.start();
 });

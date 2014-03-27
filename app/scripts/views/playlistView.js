@@ -4,8 +4,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
+    'templates',
+    './playlistItemView'
+], function ($, _, Backbone, JST, PlaylistItemView) {
     'use strict';
 
     var PlaylistView = Backbone.View.extend({
@@ -20,11 +21,22 @@ define([
         events: {},
 
         initialize: function () {
-            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.collection, 'reset', this.renderItens);
         },
 
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.template({}));
+        },
+
+        renderItens: function() {
+            var jTbody = this.$el.find('tbody');
+            for (var i = 0; i < this.collection.models.length; i++) {
+                var song = this.collection.models[i];
+                var itemView = new PlaylistItemView({model: song});
+                
+                itemView.render();
+                jTbody.append(itemView.el);
+            };
         }
     });
 

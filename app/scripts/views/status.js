@@ -4,8 +4,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
+    'templates',
+    '../playerCommunicator'
+], function ($, _, Backbone, JST, playerCommunicator) {
     'use strict';
 
     var StatusView = Backbone.View.extend({
@@ -20,11 +21,11 @@ define([
         events: {},
 
         initialize: function () {
-            this.listenTo(this.model, 'change', this.render);
+            playerCommunicator.on('song:set', this.renderSong, this);
         },
 
-        render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
+        renderSong: function (song) {
+            this.$el.html(this.template(song.toJSON()));
         }
     });
 

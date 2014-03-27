@@ -9,17 +9,18 @@ define([
 ], function ($, _, Backbone, JST, playerCommunicator) {
     'use strict';
 
-    var ControlsView = Backbone.View.extend({
-        template: JST['app/scripts/templates/controls.ejs'],
+    var PlaylistItemView = Backbone.View.extend({
+        template: JST['app/scripts/templates/playlist-item.ejs'],
 
-        tagName: 'div',
+        tagName: 'tr',
 
         id: '',
 
         className: '',
 
         events: {
-            'click .btnPlay': 'play'
+            'click .item-title': 'titleClicked',
+            'click td': 'titleClicked'
         },
 
         initialize: function () {
@@ -30,10 +31,11 @@ define([
             this.$el.html(this.template(this.model.toJSON()));
         },
 
-        play: function() {
-            playerCommunicator.trigger('audio:play');
+        titleClicked: function(e) {
+            e.preventDefault();
+            playerCommunicator.trigger('song:set', this.model);
         }
     });
 
-    return ControlsView;
+    return PlaylistItemView;
 });
