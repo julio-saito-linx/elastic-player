@@ -1,9 +1,9 @@
-elastic-player
+Elastic Player
 ==============
 
-#Instalation
+###Instalation
     sudo npm i
     bower i
 
-#Serving
+###Start server
     grunt serve
