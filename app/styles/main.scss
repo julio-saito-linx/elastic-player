@@ -1,8 +1,13 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
-$font-size-base:          16px;
+//$font-size-base:          16px;
+$table-bg-accent:           #DEE;
 
 @import 'sass-bootstrap/lib/bootstrap';
+
+@import 'status';
+@import 'controls';
+@import 'playlist';
 
 .browsehappy {
     margin: 0.2em 0;
@@ -90,30 +95,4 @@ body {
     .jumbotron {
         border-bottom: 0;
     }
-}
-
-#volumeSlider, #timeSlider{
-    width: 100%;
-}
-
-.control-line{
-    margin: 20px 0;
-}
-
-.control-buttons button{
-    width: 30%;
-    margin-left: 1%;
-    margin-right: 1%;
-}
-
-.slider-label{
-    padding-right: 90px;
-}
-
-.status-label{
-    font-size: 70%;
-}
-
-.status-info{
-    font-weight: bold;
 }
