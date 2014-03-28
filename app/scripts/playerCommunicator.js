@@ -15,7 +15,7 @@ function( Backbone, _ ) {
     playlist:previous
     playlist:next
 
-    song:play
+    song:set
 
     audio:play
     audio:pause

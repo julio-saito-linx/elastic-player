@@ -29,13 +29,13 @@ define([
         },
 
         renderItens: function() {
-            var jTbody = this.$el.find('tbody');
+            var jTableBody = this.$el.find('tbody');
             for (var i = 0; i < this.collection.models.length; i++) {
                 var song = this.collection.models[i];
                 var itemView = new PlaylistItemView({model: song});
                 
                 itemView.render();
-                jTbody.append(itemView.el);
+                jTableBody.append(itemView.el);
             };
         }
     });

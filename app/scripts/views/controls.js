@@ -19,7 +19,9 @@ define([
         className: '',
 
         events: {
-            'click .btnPlay': 'play'
+            'click .btnPlay': 'playOrPause',
+            'click .btnPrev': 'previous',
+            'click .btnNext': 'next'
         },
 
         initialize: function () {
@@ -28,10 +30,31 @@ define([
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
+
+            this.initializeVolumeInputRange();
         },
 
-        play: function() {
+        initializeVolumeInputRange: function() {
+            this.jVolumeSlider = this.$el.find('#volumeSlider');
+            this.jVolumeSlider.attr('min', 0);
+            this.jVolumeSlider.attr('max', 1);
+            this.jVolumeSlider.attr('step', 0.025);
+            this.jVolumeSlider[0].addEventListener("input", this.volumeChanged.bind(this)); 
+        },
+
+        playOrPause: function() {
             playerCommunicator.trigger('audio:play');
+        },
+
+        previous: function() {
+            playerCommunicator.trigger('playlist:previous');
+        },
+        next: function() {
+            playerCommunicator.trigger('playlist:next');
+        },
+
+        volumeChanged: function() {
+          playerCommunicator.trigger('audio:volume', this.jVolumeSlider.val());
         }
     });
 

@@ -3,22 +3,31 @@
 define([
     'underscore',
     'backbone',
-    '../playerCommunicator'
-], function (_, Backbone, playerCommunicator) {
+    '../playerCommunicator',
+    '../config/config'
+], function (_, Backbone, playerCommunicator, CONFIG) {
     'use strict';
 
     var AudioModel = Backbone.Model.extend({
         url: '',
 
-        initialize: function() {
+        defaults: {
+        },
+
+        initialize: function () {
             this.audio = new Audio();
+            this.audio.volume = CONFIG.AUDIO.VOLUME;
+
+            this.isPLaying = false;
             
             // audio events
             this.audio.addEventListener('canplay', this.canplay.bind(this), false);
             this.audio.addEventListener('ended', this.ended.bind(this), false);
 
             playerCommunicator.on('song:set', this.setSong, this);
-            playerCommunicator.on('audio:play', this.play, this);
+            playerCommunicator.on('audio:play', this.playOrPause, this);
+            playerCommunicator.on('audio:volume', this.volume, this);
+
         },
 
         canplay: function () {
@@ -28,43 +37,42 @@ define([
         },
 
         ended: function () {
-            // this.next();
+            this.isPLaying = false;
+            playerCommunicator.trigger('audio:ended');
         },
 
-        play:function() {
-            //clearTimeout(this.tId);
-            //this.tId = setTimeout(this.updateProgressBar.bind(this), 1000);
+        playOrPause: function() {
+            if(!this.isPLaying){
+                this.play();
+            }
+            else{
+                this.pause();
+            }
+        },
+
+        play: function () {
             this.audio.play();
+            this.isPLaying = true;
         },
 
-        setSong: function( song ) {
-            this.song = song;
-            
-            //set the current index if exists
-            // if(this.songs && this.songs.indexOf(this.song) >= 0){
-            //   this.currentIndex = this.songs.indexOf(this.song);
-            // }
-    
-            this.audio.src = this.song.get('path');
-
-            // this.song.set('audio', this.audio);
-            // Communicator.mediator.trigger('player:song', this.song, this.audio);
-        },
-
-        pause:function() {
-            //clearTimeout(this.tId);
+        pause: function () {
             this.audio.pause();
+            this.isPLaying = false;
         },
 
-        defaults: {
+        volume: function ( volume ) {
+            this.audio.volume = volume;
         },
 
-        // validate: function(attrs, options) {
-        // },
-
-        parse: function(response/*, options*/)  {
-            return response;
+        setSong: function ( song ) {
+            this.song = song;
+            this.audio.src = this.song.get('path');
+            
+            if(this.isPLaying){
+                this.play();
+            }
         }
+
     });
 
     return AudioModel;
