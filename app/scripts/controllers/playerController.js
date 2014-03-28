@@ -93,6 +93,7 @@ define([
             }
 
             this.playlist.reset(allSongs);
+            playerCommunicator.trigger('song:set', allSongs[0]);
         }
 
     });

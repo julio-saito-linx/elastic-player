@@ -157,7 +157,7 @@ module.exports = function (grunt) {
                     optimize: 'none',
                     paths: {
                         'templates': '../../.tmp/scripts/templates',
-                        'jquery': '../../app/bower_components/jquery/jquery',
+                        'jquery': '../../app/bower_components/jquery/dist/jquery',
                         'underscore': '../../app/bower_components/underscore/underscore',
                         'backbone': '../../app/bower_components/backbone/backbone'
                     },

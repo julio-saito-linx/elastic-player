@@ -19,8 +19,8 @@ define([
         className: '',
 
         events: {
-            'click .item-title': 'titleClicked',
-            'click td': 'titleClicked'
+            'click .item-title': 'songSelected',
+            'click td': 'songSelected'
         },
 
         initialize: function () {
@@ -31,7 +31,7 @@ define([
             this.$el.html(this.template(this.model.toJSON()));
         },
 
-        titleClicked: function(e) {
+        songSelected: function(e) {
             e.preventDefault();
             playerCommunicator.trigger('song:set', this.model);
         }
