@@ -19,10 +19,12 @@ All code is on **src/** folder. You have to go there.
     sudo npm i
     bower i
     grunt serve
+http://localhost:9000/
 
 
 ### Build
 When you build all **dist** code is copied to **root**, so the gh-pages just works.
+
     cd src
     grunt build
     
