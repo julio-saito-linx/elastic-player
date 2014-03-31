@@ -17,7 +17,7 @@ function( Backbone, _ ) {
 
     song:set
 
-    audio:play
+    audio:playOrPause
     audio:pause
     audio:playbackEnd
     */
