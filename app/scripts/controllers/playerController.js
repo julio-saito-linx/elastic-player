@@ -76,14 +76,41 @@ define([
 
         fetchPlaylist: function() {
             var songs = [
-                { path: 'audios/1-08-you-re-dead.mp3', title: 'you-re-dead'},
-                { path: 'audios/1-09-game-over.mp3', title: '09-game-over'},
-                { path: 'audios/1-10-game-over-2.mp3', title: 'game-over-2'},
-                { path: 'audios/1-11-into-the-tunnel.mp3', title: 'into-the-tunnel'},
-                { path: 'audios/1-13-hurry.mp3', title: '1-13-hurry'},
-                { path: 'audios/3-26-course-clear.mp3', title: '26-course-clear'},
-                { path: 'audios/3-27-you-re-dead.mp3', title: 'you-re-dead'},
-                { path: 'audios/3-28-game-over.mp3', title: '28-game-over'}
+                { 
+                    path: 'http://freemusicarchive.org/music/download/432ad3432ae64c5e6789ca961fecc554a51bae99',
+                    artist: 'Kevin MacLeod',
+                    album: 'Classical Sampler',
+                    track: '01',
+                    title: 'Funeral March for Brass'
+                },
+                { 
+                    path: 'http://freemusicarchive.org/music/download/46329ae5c7f85480cc8b49d5bfb3924a1fce0913',
+                    artist: 'Kevin MacLeod',
+                    album: 'Classical Sampler',
+                    track: '02',
+                    title: 'Virtutes Instrumenti'
+                },
+                { 
+                    path: 'http://freemusicarchive.org/music/download/357bf218964230ea273eaf18a55ecb09fd6518fd',
+                    artist: 'Kevin MacLeod',
+                    album: 'Classical Sampler',
+                    track: '03',
+                    title: 'J. S. Bach: Brandenburg Concerto No4-1 BWV1049'
+                },
+                { 
+                    path: 'http://freemusicarchive.org/music/download/8de1034b9a923de6a459653ec1ae91b8e07f7a17',
+                    artist: 'Kevin MacLeod',
+                    album: 'Classical Sampler',
+                    track: '04',
+                    title: 'Amazing Grace 2011'
+                },
+                { 
+                    path: 'http://freemusicarchive.org/music/download/1c492208db4da8c03c6e5fe661d290eb921c349c',
+                    artist: 'Kevin MacLeod',
+                    album: 'Classical Sampler',
+                    track: '05',
+                    title: 'Camille Saint-Saëns: Danse Macabre'
+                }
             ];
 
             var allSongs = [];
