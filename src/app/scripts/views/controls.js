@@ -29,6 +29,7 @@ define([
             this.listenTo(this.model, 'change', this.render);
 
             playerCommunicator.on('audio:pause', this.onPause, this);
+            playerCommunicator.on('song:set', this.onSetSong, this);
             
             //playerCommunicator.on('audio:play', this.onPlay, this);
             this.model.audio.addEventListener('canplay', this.onCanPlay.bind(this), false);
@@ -45,7 +46,10 @@ define([
 
         getJqueryElements: function() {
             this.jPlayGlyphicon = this.$el.find('.btnPlay > .glyphicon');
+            
+            this.jVolumeLabel = this.$el.find('#volumeSliderLabel');
             this.jVolumeSlider = this.$el.find('#volumeSlider');
+            
             this.jSliderLabel = this.$el.find('#timeSliderLabel');
             this.jTimeSlider = this.$el.find('#timeSlider');
         },
@@ -86,8 +90,9 @@ define([
         initializeVolumeInputRange: function() {
             this.jVolumeSlider.attr('min', 0);
             this.jVolumeSlider.attr('max', 1);
-            this.jVolumeSlider.attr('step', 0.025);
+            this.jVolumeSlider.attr('step', 0.01);
             this.jVolumeSlider[0].addEventListener('input', this.volumeChanged.bind(this));
+            this.volumeChanged();
         },
 
         playOrPause: function() {
@@ -102,6 +107,8 @@ define([
         },
 
         volumeChanged: function() {
+            //Label
+            this.jVolumeLabel.text('Volume: ' + Math.floor(this.jVolumeSlider.val()*100) + '%');
             playerCommunicator.trigger('audio:volume', this.jVolumeSlider.val());
         },
 
@@ -109,7 +116,15 @@ define([
             playerCommunicator.trigger('audio:time', this.jTimeSlider.val());
         },
 
+        onSetSong: function() {
+            this.jPlayGlyphicon.removeClass('glyphicon-play')
+            this.jPlayGlyphicon.text('loading...');
+        },
+        
         onCanPlay: function() {
+            this.jPlayGlyphicon.addClass('glyphicon-play')
+            this.jPlayGlyphicon.text('');
+
             this.initializeTimeInputRange();
         },
         
