@@ -75,41 +75,57 @@ define([
         },
 
         fetchPlaylist: function() {
+
+
+
             var songs = [
                 { 
-                    path: 'http://freemusicarchive.org/music/download/432ad3432ae64c5e6789ca961fecc554a51bae99',
-                    artist: 'Kevin MacLeod',
-                    album: 'Classical Sampler',
+                    id: 1,
+                    artist: 'saitodisse',
+                    album: 'some of my music',
                     track: '01',
-                    title: 'Funeral March for Brass'
+                    path: 'http://saitodisse.github.io/elastic-player-audios/library/FunkDisse%20com%20Viol%C3%A3o.mp3',
+                    title: 'FunkDisse com Violão'
                 },
                 { 
-                    path: 'http://freemusicarchive.org/music/download/46329ae5c7f85480cc8b49d5bfb3924a1fce0913',
-                    artist: 'Kevin MacLeod',
-                    album: 'Classical Sampler',
+                    id: 2,
+                    artist: 'saitodisse',
+                    album: 'some of my music',
                     track: '02',
-                    title: 'Virtutes Instrumenti'
+                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Mama%CC%83e%2C%20lalalalala%202.m4a',
+                    title: 'Mamãe, lalalalala 2'
                 },
                 { 
-                    path: 'http://freemusicarchive.org/music/download/357bf218964230ea273eaf18a55ecb09fd6518fd',
-                    artist: 'Kevin MacLeod',
-                    album: 'Classical Sampler',
+                    id: 3,
+                    artist: 'saitodisse',
+                    album: 'some of my music',
                     track: '03',
-                    title: 'J. S. Bach: Brandenburg Concerto No4-1 BWV1049'
+                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Mario%20BroThers.mp3',
+                    title: 'Mario BroThers'
                 },
                 { 
-                    path: 'http://freemusicarchive.org/music/download/8de1034b9a923de6a459653ec1ae91b8e07f7a17',
-                    artist: 'Kevin MacLeod',
-                    album: 'Classical Sampler',
+                    id: 4,
+                    artist: 'saitodisse',
+                    album: 'some of my music',
                     track: '04',
-                    title: 'Amazing Grace 2011'
+                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Porque%20hoje%20e%CC%81%20domingo%203.m4a',
+                    title: 'Porque hoje é domingo 3'
                 },
                 { 
-                    path: 'http://freemusicarchive.org/music/download/1c492208db4da8c03c6e5fe661d290eb921c349c',
-                    artist: 'Kevin MacLeod',
-                    album: 'Classical Sampler',
+                    id: 5,
+                    artist: 'saitodisse',
+                    album: 'some of my music',
                     track: '05',
-                    title: 'Camille Saint-Saëns: Danse Macabre'
+                    path: 'http://saitodisse.github.io/elastic-player-audios/library/So%CC%81%20danc%CC%A7o%20samba%20-%20refr%C3%A3o%20.m4a',
+                    title: 'Só danço samba - refrão '
+                },
+                { 
+                    id: 6,
+                    artist: 'saitodisse',
+                    album: 'some of my music',
+                    track: '06',
+                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Tema%20do%20MSN.mp3',
+                    title: 'Tema do MSN'
                 }
             ];
 

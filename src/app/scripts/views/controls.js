@@ -28,8 +28,12 @@ define([
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
 
-            playerCommunicator.on('audio:play', this.onPlay, this);
             playerCommunicator.on('audio:pause', this.onPause, this);
+            
+            //playerCommunicator.on('audio:play', this.onPlay, this);
+            this.model.audio.addEventListener('canplay', this.onCanPlay.bind(this), false);
+            this.model.audio.addEventListener('play', this.onPlay.bind(this), false);
+            this.model.audio.addEventListener('timeupdate', this.getSongTime.bind(this), false);
         },
 
         render: function () {
@@ -46,18 +50,8 @@ define([
             this.jTimeSlider = this.$el.find('#timeSlider');
         },
 
-        startTimer: function() {
-            this.stopTimer();
-            this.getSongTime();
-        },
-
-        stopTimer: function() {
-            clearTimeout(this.timerId);
-        },
-
         getSongTime: function() {
             this.updateTimeSlider();
-            this.timerId = setTimeout(this.getSongTime.bind(this), 100);
         },
 
         updateTimeSlider: function() {
@@ -70,10 +64,9 @@ define([
         },
 
         initializeTimeInputRange: function() {
-            var audio = this.model,
-                totalLength = audio.getTotalLength();
+            var audioModel = this.model,
+                totalLength = audioModel.getTotalLength();
 
-            console.log('jTimeSlider', totalLength);
             this.jTimeSlider.attr('min', 0);
             this.jTimeSlider.attr('max', totalLength);
             this.jTimeSlider.attr('step', totalLength / 100);
@@ -81,9 +74,9 @@ define([
         },
 
         getFormatedCurrentTime: function() {
-            var audio = this.model,
-                currentTime = audio.getCurrentTime(),
-                totalLength = audio.getTotalLength(),
+            var audioModel = this.model,
+                currentTime = audioModel.getCurrentTime(),
+                totalLength = audioModel.getTotalLength(),
                 currentTimeFormated = prettyMinutes(currentTime),
                 totalLengthFormated = prettyMinutes(totalLength);
                 
@@ -116,19 +109,18 @@ define([
             playerCommunicator.trigger('audio:time', this.jTimeSlider.val());
         },
 
+        onCanPlay: function() {
+            this.initializeTimeInputRange();
+        },
+        
         onPlay: function() {
             this.jPlayGlyphicon.removeClass('glyphicon-play');
             this.jPlayGlyphicon.addClass('glyphicon-pause');
-
-            this.startTimer();
-            this.initializeTimeInputRange();
         },
         
         onPause: function() {
             this.jPlayGlyphicon.removeClass('glyphicon-pause');
             this.jPlayGlyphicon.addClass('glyphicon-play');
-
-            this.stopTimer();
         },
 
     });

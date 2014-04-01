@@ -14,8 +14,6 @@ define([
 
         tagName: 'tr',
 
-        id: '',
-
         className: '',
 
         events: {

@@ -15,12 +15,19 @@ define([
         },
 
         initialize: function () {
+            this.isPLaying = false;
+            
             this.audio = new Audio();
             this.audio.volume = CONFIG.AUDIO.VOLUME;
 
-            this.isPLaying = false;
-            
-            // audio events
+            // HTML5 audio events, default sequence
+            // - play
+            // - loadedmetadata
+            // - loadeddata
+            // - canplay
+            // - playing
+            // - timeupdate... (seeked, volumechange)
+            // - ended
             this.audio.addEventListener('canplay', this.canplay.bind(this), false);
             this.audio.addEventListener('ended', this.ended.bind(this), false);
 
@@ -31,6 +38,10 @@ define([
             playerCommunicator.on('audio:volume', this.volume, this);
             playerCommunicator.on('audio:time', this.setTime, this);
 
+        },
+
+        eventOcurred: function(eventName) {
+            console.log(eventName);
         },
 
         canplay: function () {
