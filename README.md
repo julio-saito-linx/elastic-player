@@ -29,3 +29,15 @@ When you build all **dist** code is copied to **root**, so the gh-pages just wor
     grunt build
     
 
+### Easy tasks
+
+  - start server and open sublime
+
+    bash serve.sh
+
+  - Deploy to github
+
+    bash deploy.sh
+
+    
+
