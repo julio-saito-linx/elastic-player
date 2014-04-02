@@ -2,18 +2,20 @@ elastic-player
 ==============
 
 This is a simple HTML5 customized player.
-  - yoeman backbone generated
-  - backbone.js
-  - grunt
-  - require.js
-  - sass-bootstrap
-  - ejs templates
-
 **Demo:** http://saitodisse.github.io/elastic-player
+
+  - yoeman backbone generated (https://github.com/yeoman/generator-backbone)
+    - backbone.js (http://backbonejs.org/)
+    - grunt (http://gruntjs.com/)
+    - require.js (http://requirejs.org/)
+    - sass-bootstrap (https://github.com/twbs/bootstrap)
+    - ejs templates (http://embeddedjs.com/)
+
 
 ### Requirements
   - nodejs (http://nodejs.org/)
   - grunt (http://gruntjs.com/)
+
 
 ### Instalation
 All code is on **src/** folder. You have to go there.
@@ -22,7 +24,8 @@ All code is on **src/** folder. You have to go there.
     sudo npm i
     bower i
     grunt serve
-http://localhost:9000/
+
+**go to:** http://localhost:9000/
 
 
 ### Build
