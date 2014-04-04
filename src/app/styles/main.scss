@@ -96,3 +96,17 @@ body {
         border-bottom: 0;
     }
 }
+
+@media screen and (max-width: 381px) {
+    .source-code-link{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 380px) {
+    .source-code-link{
+        position: fixed;
+        right: 30px;
+        top: 30px;
+    }
+}
