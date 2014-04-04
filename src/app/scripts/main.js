@@ -34,7 +34,7 @@ require([
     //global event system
     playerCommunicator.on('showMessage', function(message) {
         console.log('showMessage:', message);
-    })
+    });
 
     new PlayerController();
 

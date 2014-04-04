@@ -79,7 +79,7 @@ define([
 
 
             var songs = [
-                { 
+                {
                     id: 1,
                     artist: 'saitodisse',
                     album: 'some of my music',
@@ -87,7 +87,7 @@ define([
                     path: 'http://saitodisse.github.io/elastic-player-audios/library/FunkDisse%20com%20Viol%C3%A3o.mp3',
                     title: 'FunkDisse com Violão'
                 },
-                { 
+                {
                     id: 2,
                     artist: 'saitodisse',
                     album: 'some of my music',
@@ -95,7 +95,7 @@ define([
                     path: 'http://saitodisse.github.io/elastic-player-audios/library/Mama%CC%83e%2C%20lalalalala%202.m4a',
                     title: 'Mamãe, lalalalala 2'
                 },
-                { 
+                {
                     id: 3,
                     artist: 'saitodisse',
                     album: 'some of my music',
@@ -103,7 +103,7 @@ define([
                     path: 'http://saitodisse.github.io/elastic-player-audios/library/Mario%20BroThers.mp3',
                     title: 'Mario BroThers'
                 },
-                { 
+                {
                     id: 4,
                     artist: 'saitodisse',
                     album: 'some of my music',
@@ -111,7 +111,7 @@ define([
                     path: 'http://saitodisse.github.io/elastic-player-audios/library/Porque%20hoje%20e%CC%81%20domingo%203.m4a',
                     title: 'Porque hoje é domingo 3'
                 },
-                { 
+                {
                     id: 5,
                     artist: 'saitodisse',
                     album: 'some of my music',
@@ -119,7 +119,7 @@ define([
                     path: 'http://saitodisse.github.io/elastic-player-audios/library/So%CC%81%20danc%CC%A7o%20samba%20-%20refr%C3%A3o%20.m4a',
                     title: 'Só danço samba - refrão '
                 },
-                { 
+                {
                     id: 6,
                     artist: 'saitodisse',
                     album: 'some of my music',

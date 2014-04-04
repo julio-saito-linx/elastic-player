@@ -68,6 +68,9 @@ define([
         },
 
         initializeTimeInputRange: function() {
+            var audioModel = this.model,
+                totalLength = audioModel.getTotalLength();
+
             //Label
             var currentTotalFormated = this.getFormatedCurrentTime();
             this.jSliderLabel.text('Time: ' + currentTotalFormated);
@@ -119,14 +122,14 @@ define([
         },
 
         onSetSong: function() {
-            this.jPlayGlyphicon.removeClass('glyphicon-play')
+            this.jPlayGlyphicon.removeClass('glyphicon-play');
             this.jPlayGlyphicon.text('loading...');
             this.jSliderLabel.text('Time: 0:00 / ...');
 
         },
         
         onCanPlay: function() {
-            this.jPlayGlyphicon.addClass('glyphicon-play')
+            this.jPlayGlyphicon.addClass('glyphicon-play');
             this.jPlayGlyphicon.text('');
 
             this.initializeTimeInputRange();

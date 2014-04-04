@@ -42,7 +42,7 @@ define([
                 
                 itemView.render();
                 jTableBody.append(itemView.el);
-            };
+            }
         },
 
         songSelected: function(songModel) {
