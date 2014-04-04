@@ -84,7 +84,7 @@ define([
                     artist: 'saitodisse',
                     album: 'some of my music',
                     track: '07',
-                    path: 'library/e%20de%20Nana-full.m4a',
+                    path: 'library/nana2.wav',
                     title: 'É de Nanã'
                 },
                 { 
