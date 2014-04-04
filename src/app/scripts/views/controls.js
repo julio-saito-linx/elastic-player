@@ -22,7 +22,9 @@ define([
         events: {
             'click .btnPlay': 'playOrPause',
             'click .btnPrev': 'previous',
-            'click .btnNext': 'next'
+            'click .btnNext': 'next',
+            'click .btnRepeatOne': 'repeatOne'
+
         },
 
         initialize: function () {
@@ -30,7 +32,8 @@ define([
 
             playerCommunicator.on('audio:pause', this.onPause, this);
             playerCommunicator.on('song:set', this.onSetSong, this);
-            
+            playerCommunicator.on('playlist:repeateOneChanged', this.onRepeateOneChanged, this);
+
             //playerCommunicator.on('audio:play', this.onPlay, this);
             this.model.audio.addEventListener('canplay', this.onCanPlay.bind(this), false);
             this.model.audio.addEventListener('play', this.onPlay.bind(this), false);
@@ -68,6 +71,9 @@ define([
         },
 
         initializeTimeInputRange: function() {
+            var audioModel = this.model,
+                totalLength = audioModel.getTotalLength();
+
             //Label
             var currentTotalFormated = this.getFormatedCurrentTime();
             this.jSliderLabel.text('Time: ' + currentTotalFormated);
@@ -108,6 +114,20 @@ define([
             playerCommunicator.trigger('playlist:next');
         },
 
+        repeatOne: function() {
+            playerCommunicator.trigger('playlist:repeateOne');
+        },
+
+        onRepeateOneChanged: function(isRepeateOneActive) {
+            var jBtnRepeatOne = this.$el.find('.btnRepeatOne');
+            if(isRepeateOneActive){
+                jBtnRepeatOne.addClass('active');
+            }
+            else{
+                jBtnRepeatOne.removeClass('active');
+            }
+        },
+
         volumeChanged: function() {
             //Label
             this.jVolumeLabel.text('Volume: ' + Math.floor(this.jVolumeSlider.val()*100) + '%');
@@ -119,14 +139,14 @@ define([
         },
 
         onSetSong: function() {
-            this.jPlayGlyphicon.removeClass('glyphicon-play')
+            this.jPlayGlyphicon.removeClass('glyphicon-play');
             this.jPlayGlyphicon.text('loading...');
             this.jSliderLabel.text('Time: 0:00 / ...');
 
         },
         
         onCanPlay: function() {
-            this.jPlayGlyphicon.addClass('glyphicon-play')
+            this.jPlayGlyphicon.addClass('glyphicon-play');
             this.jPlayGlyphicon.text('');
 
             this.initializeTimeInputRange();

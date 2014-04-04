@@ -4,7 +4,7 @@ function(  ) {
 
 	var CONFIG = {
         AUDIO: {
-            VOLUME: 0.500
+            VOLUME: 0.5
         }
     };
 	
