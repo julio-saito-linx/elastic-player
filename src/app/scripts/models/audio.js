@@ -40,6 +40,8 @@ define([
             // - ended
             this.audio.addEventListener('canplay', this.canplay.bind(this), false);
             this.audio.addEventListener('ended', this.ended.bind(this), false);
+            this.audio.addEventListener('play', this.onPlay.bind(this), false);
+            this.audio.addEventListener('pause', this.onPause.bind(this), false);
         },
 
         eventOcurred: function(eventName) {
@@ -66,12 +68,17 @@ define([
 
         play: function () {
             this.audio.play();
+        },
+
+        onPlay: function () {
             this.isPLaying = true;
+        },
+        onPause: function () {
+            this.isPLaying = false;
         },
 
         pause: function () {
             this.audio.pause();
-            this.isPLaying = false;
         },
 
         volume: function ( volume ) {
@@ -87,7 +94,11 @@ define([
             this.audio.src = this.song.get('path');
             
             if(this.isPLaying){
+                console.log('auto-play')
+
+                //FIX-ME: Why does this not work?
                 this.play();
+                //setTimeout(this.play(), 3000);
             }
         },
 

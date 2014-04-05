@@ -37,7 +37,6 @@ define([
 
             //playerCommunicator.on('audio:play', this.onPlay, this);
             //this.model.audio.addEventListener('canplay', this.onCanPlay.bind(this), false);
-            //this.model.audio.addEventListener('play', this.onPlay.bind(this), false);
             //this.model.audio.addEventListener('timeupdate', this.getSongTime.bind(this), false);
 
 

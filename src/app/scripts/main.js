@@ -29,8 +29,12 @@ require.config({
 require([
     'backbone',
     './controllers/playerController',
-    './playerCommunicator'
-], function (Backbone, PlayerController, playerCommunicator) {
+    './playerCommunicator',
+    './vendor/meldLog'
+], function (Backbone, PlayerController, playerCommunicator, meldLog) {
+
+    __MELD_LOG('App.playerCommunicator', playerCommunicator, 10);
+
     //global event system
     playerCommunicator.on('showMessage', function(message) {
         console.log('showMessage:', message);
