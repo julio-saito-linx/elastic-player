@@ -30,15 +30,19 @@ define([
 
             playerCommunicator.on('audio:pause', this.onPause, this);
             playerCommunicator.on('song:set', this.onSetSong, this);
-            
-            //playerCommunicator.on('audio:play', this.onPlay, this);
-            this.model.audio.addEventListener('canplay', this.onCanPlay.bind(this), false);
-            this.model.audio.addEventListener('play', this.onPlay.bind(this), false);
-            this.model.audio.addEventListener('timeupdate', this.getSongTime.bind(this), false);
+           
         },
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
+
+            this.model.setNativeAudio(this.$el.find('#nativeAudio')[0]);
+
+            //playerCommunicator.on('audio:play', this.onPlay, this);
+            this.model.audio.addEventListener('canplay', this.onCanPlay.bind(this), false);
+            this.model.audio.addEventListener('play', this.onPlay.bind(this), false);
+            this.model.audio.addEventListener('timeupdate', this.getSongTime.bind(this), false);
+
 
             this.getJqueryElements();
             this.initializeVolumeInputRange();
@@ -121,10 +125,14 @@ define([
             playerCommunicator.trigger('audio:time', this.jTimeSlider.val());
         },
 
-        onSetSong: function() {
+        onSetSong: function(songModel) {
             this.jPlayGlyphicon.removeClass('glyphicon-play');
             this.jPlayGlyphicon.text('loading...');
             this.jSliderLabel.text('Time: 0:00 / ...');
+
+            this.$el.find("#nativeAudio").attr('src', songModel.get('path'));
+            var nativeAudio = this.$el.find("#nativeAudio")[0];
+            nativeAudio.play();
 
         },
         

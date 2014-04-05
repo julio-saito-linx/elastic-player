@@ -16,8 +16,18 @@ define([
 
         initialize: function () {
             this.isPLaying = false;
-            
-            this.audio = new Audio();
+
+            playerCommunicator.on('song:set', this.setSong, this);
+            playerCommunicator.on('audio:playOrPause', this.playOrPause, this);
+            playerCommunicator.on('audio:play', this.play, this);
+            playerCommunicator.on('audio:pause', this.pause, this);
+            playerCommunicator.on('audio:volume', this.volume, this);
+            playerCommunicator.on('audio:time', this.setTime, this);
+
+        },
+
+        setNativeAudio: function(nativeAudio) {
+            this.audio = nativeAudio;
             this.audio.volume = CONFIG.AUDIO.VOLUME;
 
             // HTML5 audio events, default sequence
@@ -30,14 +40,6 @@ define([
             // - ended
             this.audio.addEventListener('canplay', this.canplay.bind(this), false);
             this.audio.addEventListener('ended', this.ended.bind(this), false);
-
-            playerCommunicator.on('song:set', this.setSong, this);
-            playerCommunicator.on('audio:playOrPause', this.playOrPause, this);
-            playerCommunicator.on('audio:play', this.play, this);
-            playerCommunicator.on('audio:pause', this.pause, this);
-            playerCommunicator.on('audio:volume', this.volume, this);
-            playerCommunicator.on('audio:time', this.setTime, this);
-
         },
 
         eventOcurred: function(eventName) {
