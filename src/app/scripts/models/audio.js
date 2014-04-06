@@ -50,6 +50,10 @@ define([
 
         canplay: function () {
             this.totalLength = this.audio.duration;
+
+            if(this.isPLaying){
+                this.play();
+            }
         },
 
         ended: function () {
@@ -92,14 +96,6 @@ define([
         setSong: function ( song ) {
             this.song = song;
             this.audio.src = this.song.get('path');
-            
-            if(this.isPLaying){
-                console.log('auto-play')
-
-                //FIX-ME: Why does this not work?
-                this.play();
-                //setTimeout(this.play(), 3000);
-            }
         },
 
         getCurrentTime: function() {

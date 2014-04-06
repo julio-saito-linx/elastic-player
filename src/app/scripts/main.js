@@ -33,6 +33,7 @@ require([
     './vendor/meldLog'
 ], function (Backbone, PlayerController, playerCommunicator, meldLog) {
 
+    // LOG
     __MELD_LOG('App.playerCommunicator', playerCommunicator, 10);
 
     //global event system
@@ -40,7 +41,14 @@ require([
         console.log('showMessage:', message);
     });
 
-    new PlayerController();
+
+    var playerController = new PlayerController();
 
     Backbone.history.start();
+
+
+    // global for debug
+    window.__app = {};
+    __app.communicator = playerCommunicator;
+    __app.controller = playerController;
 });

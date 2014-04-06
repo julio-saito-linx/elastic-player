@@ -75,9 +75,6 @@ define([
         },
 
         fetchPlaylist: function() {
-
-
-
             var songs = [
                 {
                     id: 1,
