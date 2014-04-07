@@ -76,14 +76,17 @@ define([
 
         fetchPlaylist: function() {
             var songs = [
-                {
-                    id: 1,
-                    artist: 'saitodisse',
-                    album: 'some of my music',
-                    track: '01',
-                    path: 'http://saitodisse.github.io/elastic-player-audios/library/FunkDisse%20com%20Viol%C3%A3o.mp3',
-                    title: 'FunkDisse com Violão'
-                },
+
+                // This songs never auto load
+                // {
+                //     id: 1,
+                //     artist: 'saitodisse',
+                //     album: 'some of my music',
+                //     track: '01',
+                //     path: 'http://saitodisse.github.io/elastic-player-audios/library/FunkDisse%20com%20Viol%C3%A3o.mp3',
+                //     title: 'FunkDisse com Violão'
+                // },
+
                 {
                     id: 2,
                     artist: 'saitodisse',
