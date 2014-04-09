@@ -34,7 +34,7 @@ require([
 ], function (Backbone, PlayerController, playerCommunicator, meldLog) {
 
     // LOG
-    __MELD_LOG('App.playerCommunicator', playerCommunicator, 10);
+    //__MELD_LOG('App.playerCommunicator', playerCommunicator, 10);
 
     //global event system
     playerCommunicator.on('showMessage', function(message) {
