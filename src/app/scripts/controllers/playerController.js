@@ -84,14 +84,7 @@ define([
                 console.log('adding from socket', '\n', songModel.get('artist'), '-', songModel.get('title'));
 
             }.bind(this));
-
-            this.socket.on('news', function(data) {
-                console.log(data);
-            }.bind(this));
-
         }
-
-
     });
 
     return PlayerController;
