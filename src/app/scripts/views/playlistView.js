@@ -24,6 +24,7 @@ define([
 
         initialize: function () {
             this.listenTo(this.collection, 'reset', this.renderItens);
+            this.listenTo(this.collection, 'add', this.renderItens);
             playerCommunicator.on('song:set', this.songSelected, this);
         },
 
@@ -33,6 +34,11 @@ define([
 
         renderItens: function() {
             var jTableBody = this.$el.find('tbody');
+            
+            //reset
+            jTableBody.html('');
+
+            //add all
             for (var i = 0; i < this.collection.models.length; i++) {
                 var song = this.collection.models[i];
                 var itemView = new PlaylistItemView({

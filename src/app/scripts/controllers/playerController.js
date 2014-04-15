@@ -10,8 +10,8 @@ define([
     '../models/audio',
     '../models/song',
     '../collections/playlist',
-    '../playerCommunicator'
-], function (
+    '../playerCommunicator',
+    'socketIO'], function (
     $,
     _,
     Backbone,
@@ -21,7 +21,8 @@ define([
     Audio,
     Song,
     Playlist,
-    playerCommunicator
+    playerCommunicator,
+    socketIO
 ) {
     'use strict';
 
@@ -32,8 +33,8 @@ define([
             this.initializeViews();
             this.renderViews();
             this.addViewsToDOM();
-
             this.fetchPlaylist();
+            this.initilizeWebSockectComminication();
         },
 
         initializeRegions: function() {
@@ -83,7 +84,7 @@ define([
                 //     artist: 'saitodisse',
                 //     album: 'some of my music',
                 //     track: '01',
-                //     path: 'http://saitodisse.github.io/elastic-player-audios/library/FunkDisse%20com%20Viol%C3%A3o.mp3',
+                //     filename: 'http://saitodisse.github.io/elastic-player-audios/library/FunkDisse%20com%20Viol%C3%A3o.mp3',
                 //     title: 'FunkDisse com Violão'
                 // },
 
@@ -92,7 +93,7 @@ define([
                     artist: 'saitodisse',
                     album: 'some of my music',
                     track: '02',
-                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Mama%CC%83e%2C%20lalalalala%202.m4a',
+                    filename: 'http://saitodisse.github.io/elastic-player-audios/library/Mama%CC%83e%2C%20lalalalala%202.m4a',
                     title: 'Mamãe, lalalalala 2'
                 },
                 {
@@ -100,7 +101,7 @@ define([
                     artist: 'saitodisse',
                     album: 'some of my music',
                     track: '03',
-                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Mario%20BroThers.mp3',
+                    filename: 'http://saitodisse.github.io/elastic-player-audios/library/Mario%20BroThers.mp3',
                     title: 'Mario BroThers'
                 },
                 {
@@ -108,7 +109,7 @@ define([
                     artist: 'saitodisse',
                     album: 'some of my music',
                     track: '04',
-                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Porque%20hoje%20e%CC%81%20domingo%203.m4a',
+                    filename: 'http://saitodisse.github.io/elastic-player-audios/library/Porque%20hoje%20e%CC%81%20domingo%203.m4a',
                     title: 'Porque hoje é domingo 3'
                 },
                 {
@@ -116,7 +117,7 @@ define([
                     artist: 'saitodisse',
                     album: 'some of my music',
                     track: '05',
-                    path: 'http://saitodisse.github.io/elastic-player-audios/library/So%CC%81%20danc%CC%A7o%20samba%20-%20refr%C3%A3o%20.m4a',
+                    filename: 'http://saitodisse.github.io/elastic-player-audios/library/So%CC%81%20danc%CC%A7o%20samba%20-%20refr%C3%A3o%20.m4a',
                     title: 'Só danço samba - refrão '
                 },
                 {
@@ -124,7 +125,7 @@ define([
                     artist: 'saitodisse',
                     album: 'some of my music',
                     track: '06',
-                    path: 'http://saitodisse.github.io/elastic-player-audios/library/Tema%20do%20MSN.mp3',
+                    filename: 'http://saitodisse.github.io/elastic-player-audios/library/Tema%20do%20MSN.mp3',
                     title: 'Tema do MSN'
                 }
             ];
@@ -137,7 +138,25 @@ define([
 
             this.playlist.reset(allSongs);
             playerCommunicator.trigger('song:set', allSongs[0]);
+        },
+
+        initilizeWebSockectComminication: function() {
+            //TODO: this must be dynamic
+            this.socket = socketIO.connect('http://192.168.15.103:9003');
+            this.socket.on('toAll:playlist:add', function(data) {
+                console.log('from player: toAll:playlist:add', data);
+
+                var songModel = new Song(data);
+                this.playlist.add(songModel);
+                
+            }.bind(this));
+
+            this.socket.on('news', function(data) {
+                console.log(data);
+            }.bind(this));
+
         }
+
 
     });
 

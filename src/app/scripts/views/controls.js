@@ -74,7 +74,8 @@ define([
         },
 
         onSetSong: function(songModel) {
-            this.jNativeAudio.attr('src', songModel.get('path'));
+            // TODO: this must be dynamic
+            this.jNativeAudio.attr('src', 'http://192.168.15.103:9004/go' + songModel.get('filename'));
         },
     });
 

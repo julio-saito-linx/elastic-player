@@ -40,6 +40,10 @@ define([
         nextAndPlay:function() {
             this.next();
             playerCommunicator.trigger('audio:play', this.at(this.currentIndex));
+        },
+
+        addByUrl: function() {
+            console.log('addByUrl called')
         }
     });
 
