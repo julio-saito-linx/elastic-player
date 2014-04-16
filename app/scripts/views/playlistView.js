@@ -23,32 +23,45 @@ define([
         events: {},
 
         initialize: function () {
-            this.listenTo(this.collection, 'reset', this.renderItens);
-            this.listenTo(this.collection, 'add', this.renderItens);
+            this.listenTo(this.collection, 'reset', this.renderAllItens);
+            this.listenTo(this.collection, 'add', this.addOne);
+            this.listenTo(this.collection, 'remove', this.removeOne);
             playerCommunicator.on('song:set', this.songSelected, this);
         },
 
         render: function () {
             this.$el.html(this.template({}));
+
+            this.jTableBody = this.$el.find('tbody');
         },
 
-        renderItens: function() {
-            var jTableBody = this.$el.find('tbody');
+        renderAllItens: function() {
+            this.clearAll();
             
-            //reset
-            jTableBody.html('');
-
             //add all
             for (var i = 0; i < this.collection.models.length; i++) {
                 var song = this.collection.models[i];
-                var itemView = new PlaylistItemView({
-                    model: song,
-                    id: song.id
-                });
-                
-                itemView.render();
-                jTableBody.append(itemView.el);
+                this.addOne(song);
             }
+        },
+
+        clearAll: function() {
+            this.jTableBody.html('');
+        },
+
+        addOne: function(songModel) {
+            var itemView = new PlaylistItemView({
+                model: songModel,
+                id: songModel.id
+            });
+            
+            itemView.render();
+            this.jTableBody.append(itemView.el);
+        },
+
+        removeOne: function(songModel) {
+            console.log('will remove:', songModel.id);
+            this.jTableBody.find('#' + songModel.id).remove();
         },
 
         songSelected: function(songModel) {

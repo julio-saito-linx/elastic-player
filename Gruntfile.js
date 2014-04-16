@@ -47,7 +47,8 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                     '<%= yeoman.app %>/scripts/templates/*.ejs',
                     'test/spec/**/*.js'
-                ]
+                ],
+                tasks: ['jst']
             },
             jst: {
                 files: [

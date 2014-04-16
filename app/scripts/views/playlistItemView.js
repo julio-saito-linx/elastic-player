@@ -17,8 +17,8 @@ define([
         className: '',
 
         events: {
-            'click .item-title': 'songSelected',
-            'click td': 'songSelected'
+            'click .click-to-play': 'songSelected',
+            'click #btnRemove': 'removeSong'
         },
 
         initialize: function () {
@@ -32,6 +32,11 @@ define([
         songSelected: function(e) {
             e.preventDefault();
             playerCommunicator.trigger('song:set', this.model);
+        },
+
+        removeSong: function(e) {
+            e.preventDefault();
+            this.model.collection.remove(this.model);
         }
     });
 

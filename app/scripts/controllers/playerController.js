@@ -77,6 +77,8 @@ define([
 
         addInitialSongs: function() {
             //id=142292
+            var songModel = new Song({"filename": "/media/julio/4 H-MP3 (1,36 TB)/Mp3/2000 Wanda Sá & Bossa Três/02 Deixa a Nega Gingar.mp3", "nb_streams": "1", "format_name": "mp3", "format_long_name": "MPEG audio layer 2/3", "start_time": "0.000000 ", "duration": "186.697143 ", "size": "4891591.000000 ", "bit_rate": "209605.000000 ", "title": "Deixa a Nega Gingar", "track": "2", "album_artist": "Wanda Sá & Bossa Três", "genre": "MPB", "album": "Wanda Sá & Bossa Três", "artist": "Wanda Sá & Bossa Três", "date": "2000", "id": 142292 });
+            this.playlist.add(songModel);
         },
 
         initilizeWebSockectComminication: function() {
