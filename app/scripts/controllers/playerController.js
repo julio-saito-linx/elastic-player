@@ -33,6 +33,7 @@ define([
             this.initializeViews();
             this.renderViews();
             this.addViewsToDOM();
+            this.addInitialSongs();
             this.initilizeWebSockectComminication();
         },
 
@@ -72,6 +73,10 @@ define([
             this.jStatusRegion.html(this.statusView.el);
             this.jControlsRegion.html(this.controlsView.el);
             this.jPlaylistRegion.html(this.playlistView.el);
+        },
+
+        addInitialSongs: function() {
+            //id=142292
         },
 
         initilizeWebSockectComminication: function() {

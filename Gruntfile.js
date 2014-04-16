@@ -243,15 +243,6 @@ module.exports = function (grunt) {
                         'bower_components/sass-bootstrap/fonts/*.*'
                     ]
                 }]
-            },
-            outerFolder: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= yeoman.dist %>',
-                    dest: '..',
-                    src: ['**']
-                }]
             }
         },
         bower: {
@@ -356,8 +347,7 @@ module.exports = function (grunt) {
         'uglify',
         'copy:dist',
         'rev',
-        'usemin',
-        'copy:outerFolder'
+        'usemin'
     ]);
 
     grunt.registerTask('default', [
