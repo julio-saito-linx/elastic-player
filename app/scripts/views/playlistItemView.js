@@ -36,7 +36,8 @@ define([
 
         removeSong: function(e) {
             e.preventDefault();
-            this.model.collection.remove(this.model);
+            var playlist = this.model.collection;
+            playlist.remove(this.model);
         }
     });
 
