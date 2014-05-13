@@ -9,6 +9,7 @@ define([
     '../views/playlistView',
     '../models/audio',
     '../models/song',
+    '../models/userModel',
     '../collections/playlist',
     '../playerCommunicator',
     'socketIO'], function (
@@ -20,6 +21,7 @@ define([
     PlaylistView,
     Audio,
     Song,
+    UserModel,
     Playlist,
     playerCommunicator,
     socketIO
@@ -34,6 +36,7 @@ define([
             this.renderViews();
             this.addViewsToDOM();
             this.addInitialSongs();
+            this.getUserQuerystring();
             this.initilizeWebSockectComminication();
         },
 
@@ -47,6 +50,7 @@ define([
         initializeModels: function() {
             this.audio = new Audio();
             this.playlist = new Playlist();
+            this.userModel = new UserModel();
         },
         
         initializeViews: function() {
@@ -81,9 +85,20 @@ define([
             this.playlist.add(songModel);
         },
 
+        getUserQuerystring: function() {
+            var user = window.location.search.substring(1).split('=')[1];
+            if(user){
+                this.userModel.set('userName', user);
+            }
+        },
+
         initilizeWebSockectComminication: function() {
             //TODO: this must be dynamic
             this.socket = socketIO.connect('http://192.168.15.103:9003');
+
+            var userName = this.userModel.get('userName');
+            console.log('the user is', this.userModel.get('userName'));
+
             this.socket.on('toAll:playlist:add', function(data) {
                 var songModel = new Song(data);
                 this.playlist.add(songModel);
