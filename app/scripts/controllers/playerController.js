@@ -37,7 +37,7 @@ define([
             this.addViewsToDOM();
             this.addInitialSongs();
             this.getUserQuerystring();
-            this.initilizeWebSockectComminication();
+            this.initializeSocketIO();
         },
 
         initializeRegions: function() {
@@ -92,21 +92,52 @@ define([
             }
         },
 
-        initilizeWebSockectComminication: function() {
+        initializeSocketIO: function() {
+            //////////////////////////
+            // Initializing Sockets
+            //////////////////////////
+            var querystringName = window.location.search.substring(1).split('=')[0];
+            var querystringValue = window.location.search.substring(1).split('=')[1];
+            if(querystringName === 'sid'){
+                this.userModel.set('sid', querystringValue);
+            }
+            console.log('this.userModel.sid:', this.userModel.get('sid'));
+
+            var clientID = {
+                appName: '1-player',
+                sid: this.userModel.get('sid')
+            }
+
             //TODO: this must be dynamic
             this.socket = socketIO.connect('http://192.168.15.103:9003');
 
-            var userName = this.userModel.get('userName');
-            console.log('the user is', this.userModel.get('userName'));
+            // first connection -> send SID to server
+            // server -> client
+            this.socket.on('connect', function (){
+                // client -> server
+                this.socket.emit('client:connection', clientID);
+            }.bind(this));
 
+            this.socket.on('server:userName', function (userName){
+                $('#socketInfo').html('connected as ' + userName);
+            }.bind(this));
+
+
+
+            //////////////////////////
+            // player API
+            //////////////////////////
             this.socket.on('toAll:playlist:add', function(data) {
-                var songModel = new Song(data);
+                console.log('song received from socket', data);
+                var songModel = new Song(data.data);
                 this.playlist.add(songModel);
                 
                 console.log('adding from socket', '\n', songModel.get('artist'), '-', songModel.get('title'));
 
             }.bind(this));
-        }
+
+        },
+
     });
 
     return PlayerController;
