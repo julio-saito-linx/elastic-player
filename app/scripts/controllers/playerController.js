@@ -93,20 +93,18 @@ define([
         },
 
         initializeSocketIO: function() {
-            //////////////////////////
-            // Initializing Sockets
-            //////////////////////////
+            // Getting SID from querystring
             var querystringName = window.location.search.substring(1).split('=')[0];
             var querystringValue = window.location.search.substring(1).split('=')[1];
             if(querystringName === 'sid'){
                 this.userModel.set('sid', querystringValue);
             }
-            console.log('this.userModel.sid:', this.userModel.get('sid'));
 
-            var clientID = {
+            var clientInfo = {
                 appName: '1-player',
                 sid: this.userModel.get('sid')
             }
+            console.info('me:', clientInfo);
 
             //TODO: this must be dynamic
             this.socket = socketIO.connect('http://192.168.15.103:9003');
@@ -115,7 +113,7 @@ define([
             // server -> client
             this.socket.on('connect', function (){
                 // client -> server
-                this.socket.emit('client:connection', clientID);
+                this.socket.emit('client:connection', clientInfo);
             }.bind(this));
 
             this.socket.on('server:userName', function (userName){
