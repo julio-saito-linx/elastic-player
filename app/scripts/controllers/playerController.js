@@ -117,9 +117,16 @@ define([
             }.bind(this));
 
             this.socket.on('server:userName', function (userName){
+                clientInfo.userName = userName;
                 $('#socketInfo').html('connected as ' + userName);
+                
+                this.socket.emit('client:request:playerName', clientInfo);
             }.bind(this));
 
+            this.socket.on('server:response:playerName', function (playerName){
+                clientInfo.playerName = playerName;
+                $('#playerTitle').html(playerName);
+            }.bind(this));
 
 
             //////////////////////////
