@@ -134,7 +134,16 @@ define([
             //////////////////////////
             this.socket.on('toAll:playlist:add', function(data) {
                 console.log('song received from socket', data);
-                var songModel = new Song(data.data);
+                
+                var song = data.data.song;
+                var player = data.data.player;
+
+                if(clientInfo.sid !== player.sid){
+                    console.log('song sended for', player.userName, 'not for me... :(');
+                    return;
+                }
+
+                var songModel = new Song(song);
                 this.playlist.add(songModel);
                 
                 console.log('adding from socket', '\n', songModel.get('artist'), '-', songModel.get('title'));
