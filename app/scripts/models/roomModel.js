@@ -6,7 +6,7 @@ define([
 ], function (_, Backbone) {
     'use strict';
 
-    var UserModel = Backbone.Model.extend({
+    var RoomModel = Backbone.Model.extend({
         url: '',
 
         initialize: function() {
@@ -23,5 +23,5 @@ define([
         }
     });
 
-    return UserModel;
+    return RoomModel;
 });

@@ -9,7 +9,7 @@ define([
     '../views/playlistView',
     '../models/audio',
     '../models/song',
-    '../models/userModel',
+    '../models/roomModel',
     '../collections/playlist',
     '../playerCommunicator',
     'socketIO'], function (
@@ -21,7 +21,7 @@ define([
     PlaylistView,
     Audio,
     Song,
-    UserModel,
+    RoomModel,
     Playlist,
     playerCommunicator,
     socketIO
@@ -50,7 +50,7 @@ define([
         initializeModels: function() {
             this.audio = new Audio();
             this.playlist = new Playlist();
-            this.userModel = new UserModel();
+            this.roomModel = new RoomModel();
         },
         
         initializeViews: function() {
@@ -88,7 +88,7 @@ define([
         getUserQuerystring: function() {
             var user = window.location.search.substring(1).split('=')[1];
             if(user){
-                this.userModel.set('userName', user);
+                this.roomModel.set('roomName', user);
             }
         },
 
@@ -97,12 +97,12 @@ define([
             var querystringName = window.location.search.substring(1).split('=')[0];
             var querystringValue = window.location.search.substring(1).split('=')[1];
             if(querystringName === 'sid'){
-                this.userModel.set('sid', querystringValue);
+                this.roomModel.set('sid', querystringValue);
             }
 
             var clientInfo = {
                 appName: '1-player',
-                sid: this.userModel.get('sid')
+                sid: this.roomModel.get('sid')
             }
             console.info('me:', clientInfo);
 
@@ -116,9 +116,9 @@ define([
                 this.socket.emit('client:connection', clientInfo);
             }.bind(this));
 
-            this.socket.on('server:userName', function (userName){
-                clientInfo.userName = userName;
-                $('#socketInfo').html('connected as ' + userName);
+            this.socket.on('server:roomName', function (roomName){
+                clientInfo.roomName = roomName;
+                $('#socketInfo').html(roomName);
                 
                 this.socket.emit('client:request:playerName', clientInfo);
             }.bind(this));
@@ -139,7 +139,7 @@ define([
                 var player = data.data.player;
 
                 if(clientInfo.sid !== player.sid){
-                    console.log('song sended for', player.userName, 'not for me... :(');
+                    console.log('song sended for', player.roomName, 'not for me... :(');
                     return;
                 }
 
