@@ -2,7 +2,7 @@ elastic-player
 ==============
 
 This is a simple HTML5 customized player.
-**Demo:** http://saitodisse.github.io/elastic-player
+**Demo:** http://saitodisse.github.io/elastic-player (gh-pages branch)
 
   - yoeman backbone generated (https://github.com/yeoman/generator-backbone)
     - backbone.js (http://backbonejs.org/)
@@ -11,11 +11,12 @@ This is a simple HTML5 customized player.
     - sass-bootstrap (https://github.com/twbs/bootstrap)
     - ejs templates (http://embeddedjs.com/)
 
-
 ### Requirements
   - nodejs (http://nodejs.org/)
   - grunt (http://gruntjs.com/)
 
+### Part of local-music-party
+see: https://github.com/saitodisse/socket-io-server for more information
 
 ### Instalation
 All code is on **src/** folder. You have to go there.
