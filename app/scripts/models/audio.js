@@ -95,9 +95,9 @@ define([
 
         setSong: function ( song ) {
             this.song = song;
-            
+
             //TODO: this must be dynamic
-            this.audio.src = 'http://192.168.15.103:9004/go' + this.song.get('filename');
+            this.audio.src = 'http://mp3server.azk.dev' + this.song.get('filename');
         },
 
         getCurrentTime: function() {

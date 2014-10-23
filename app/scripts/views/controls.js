@@ -27,7 +27,7 @@ define([
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
             playerCommunicator.on('song:set', this.onSetSong, this);
-           
+
         },
 
         render: function () {
@@ -58,7 +58,7 @@ define([
                 totalLength = audioModel.getTotalLength(),
                 currentTimeFormated = prettyMinutes(currentTime),
                 totalLengthFormated = prettyMinutes(totalLength);
-                
+
             return currentTimeFormated + ' / ' + totalLengthFormated;
         },
 
@@ -75,7 +75,7 @@ define([
 
         onSetSong: function(songModel) {
             // TODO: this must be dynamic
-            this.jNativeAudio.attr('src', 'http://192.168.15.103:9004/go' + songModel.get('filename'));
+            this.jNativeAudio.attr('src', 'http://mp3server.azk.dev' + songModel.get('filename'));
         },
     });
 

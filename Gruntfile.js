@@ -1,6 +1,7 @@
 'use strict';
 var LIVERELOAD_PORT = 35731;
-var SERVER_PORT = 9001;
+// var LIVERELOAD_PORT = process.env.LIVE_RELOAD_PORT || 35731;
+var SERVER_PORT = process.env.HTTP_PORT || 9001;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));

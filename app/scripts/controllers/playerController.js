@@ -46,13 +46,13 @@ define([
             this.jControlsRegion = this.jMain.find('#controls');
             this.jPlaylistRegion = this.jMain.find('#playlist');
         },
-        
+
         initializeModels: function() {
             this.audio = new Audio();
             this.playlist = new Playlist();
             this.roomModel = new RoomModel();
         },
-        
+
         initializeViews: function() {
             this.statusView = new StatusView({
                 model: this.audio
@@ -66,13 +66,13 @@ define([
                 collection: this.playlist
             });
         },
-        
+
         renderViews: function() {
             this.statusView.render();
             this.controlsView.render();
             this.playlistView.render();
         },
-        
+
         addViewsToDOM: function() {
             this.jStatusRegion.html(this.statusView.el);
             this.jControlsRegion.html(this.controlsView.el);
@@ -107,7 +107,7 @@ define([
             console.info('me:', clientInfo);
 
             //TODO: this must be dynamic
-            this.socket = socketIO.connect('http://192.168.15.103:9003');
+            this.socket = socketIO.connect('http://socketserver.azk.dev');
 
             // first connection -> send SID to server
             // server -> client
@@ -119,7 +119,7 @@ define([
             this.socket.on('server:roomName', function (roomName){
                 clientInfo.roomName = roomName;
                 $('#socketInfo').html(roomName);
-                
+
                 this.socket.emit('client:request:playerName', clientInfo);
             }.bind(this));
 
@@ -134,7 +134,7 @@ define([
             //////////////////////////
             this.socket.on('toAll:playlist:add', function(data) {
                 console.log('song received from socket', data);
-                
+
                 var song = data.data.song;
                 var player = data.data.player;
 
@@ -145,7 +145,7 @@ define([
 
                 var songModel = new Song(song);
                 this.playlist.add(songModel);
-                
+
                 console.log('adding from socket', '\n', songModel.get('artist'), '-', songModel.get('title'));
 
             }.bind(this));
